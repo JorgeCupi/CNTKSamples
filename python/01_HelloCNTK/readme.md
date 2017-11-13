@@ -21,7 +21,18 @@ Note that there are also more complex operations defined such as:
 - Normalization operations
 - Others
 
-On this post, we'll look only at some of the linear operations:
+On this post, we'll look only at some of the linear operations. 
+## Syntaxis ##
+Most of them have a similar arguments pattern:
+```console
+operationName(arg1, arg2, .., argN, functionName)
+```
+- arg1: The first tensor
+- arg2: The second tensor
+- argN: The N-th tensor
+- functionName: Optional, a name for the current operation
+
+## Operations ##
 #### Adding two tensors ####
 ```console
 cntk.plus([1, 2, 3], [4, 5, 6]).eval()
