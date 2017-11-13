@@ -33,25 +33,30 @@ operationName(arg1, arg2, .., argN, functionName)
 - functionName: Optional, a name for the current operation
 
 ## Operations ##
+Let's define two first tensors:
+```python
+A = [1,2,3]
+B = [4,5,6]
+```
 #### Adding two tensors ####
-```console
-cntk.plus([1, 2, 3], [4, 5, 6]).eval()
+```python
+cntk.plus(A,B).eval()
 
 output:
 [ 5.  7.  9.]
 ```
 
 #### Substracting two tensors ####
-```console
-cntk.minus([1, 2, 3], [4, 5, 6]).eval()
+```python
+cntk.minus(A,B).eval()
 
 output:
 [-3. -3. -3.]
 ```
 
 #### Multiplying two tensors ####
-```console
-cntk.times([1, 2, 3], [4, 5, 6]).eval()
+```python
+cntk.times(A,B).eval()
 
 output
 [[  4.   5.   6.]
@@ -60,7 +65,7 @@ output
 ```
 
 #### Dividing two tensors ####
-```console
+```python
 cntk.element_divide([4,32, 15], [2, 4, 5]).eval()
 
 output
@@ -68,21 +73,21 @@ output
 ```
 
 #### Exponential power to a tensor's values: ####
-```console
-cntk.pow([1, 2, 3], [4, 5, 6]).eval()
+```python
+cntk.pow(A,B).eval()
 
 output
 [  1.   9.  64.]
 ```
 
 #### Defining the minimum or maximum single values of multiple tensors ####
-```console
-cntk.element_min([1,2, 3], [4, 5, 6], [2,1,0]).eval()
+```python
+cntk.element_min(A,B, [2,1,0]).eval()
 output 
 [ 1.  1.  0.]
 
 
-cntk.element_max([1,2,3],[4,5,6],[2,9,0]).eval()
+cntk.element_max(A,B,[2,9,0]).eval()
 
 output
 [ 4.  9.  6.]
