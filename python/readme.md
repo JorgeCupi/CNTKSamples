@@ -23,3 +23,13 @@ And the output should be the CNTK version:
 2.2
 ```
 ## What exactly is Anaconda? ##
+For those not really familiar with Python, before we dig deep into CNTK we should learn more this Anaconda thing:
+
+*Anaconda is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda quickly installs, runs and updates packages and their dependencies. Conda easily creates, saves, loads and switches between environments on your local computer. It was created for Python programs, but it can package and distribute software for any language.* - [Official documentation](https://conda.io/docs/index.html)
+
+## Can Anaconda replace our traditional 'pip' #
+More no than yes, indeed both are package managers but there are some differences:
+- Conda is language agnostic
+- Conda and pip have different packaging formats
+- Conda cannot install wheels directly like pip
+- Conda creates a virtual environment while pip relies on on virtualenv
