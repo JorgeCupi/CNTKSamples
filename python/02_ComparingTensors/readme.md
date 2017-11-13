@@ -20,12 +20,18 @@ operationName(arg1, arg2, functionName)
 Note that they are element by element comparison of two tensors elements.
 
 ## Operations ##
+Let's define two tensors:
+
+```python
+A = [1,3,4]
+B = [4,3,2]
+```
 #### less ####
 Result is 
 - 1 if left < right, 
 - 0 if right <= left
-```console
-cntk.less([1, 3, 4], [4, 3, 2]).eval()
+```python
+cntk.less(A, B).eval()
 
 output:
 [ 1.  0.  0.]
@@ -35,8 +41,8 @@ output:
 Result is 
 - 1 if values are the same
 - 0 if values are not the same
-```console
-cntk.equal([1, 3, 4], [4, 3, 2]).eval()
+```python
+cntk.equal(A, B).eval()
 
 output:
 [ 0.  1.  0.]
@@ -46,8 +52,8 @@ output:
 Result is 
 - 1 if left > right, 
 - 0 if right >= left
-```console
-cntk.greater([1, 3, 4], [4, 3, 2]).eval()
+```python
+cntk.greater(A,B).eval()
 
 output
 [ 0.  0.  1.]
@@ -55,8 +61,8 @@ output
 #### less_equal ####
 - 1 if left <= right, 
 - 0 if right < left
-```console
-cntk.less_equal([1, 3, 4], [4, 3, 2]).eval()
+```python
+cntk.less_equal(A,B).eval()
 
 output 
 [ 1.  1.  0.]
@@ -66,8 +72,8 @@ output
 Result is 
 - 1 if values are not the same
 - 0 if values are the same
-```console
-cntk.not_equal([1, 3, 4], [4, 3, 2]).eval()
+```python
+cntk.not_equal(A,B).eval()
 
 output
 [ 1.  0.  1.]
@@ -76,8 +82,8 @@ output
 Result is 
 - 1 if left >= right, 
 - 0 if right > left
-```console
-cntk.greater_equal([1, 3, 4], [4, 3, 2]).eval()
+```python
+cntk.greater_equal(A,B).eval()
 
 output
 [ 0.  1.  1.]
