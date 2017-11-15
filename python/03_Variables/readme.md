@@ -26,5 +26,35 @@ features = cntk.input_variable(7)
 
 This *features* result object is a CNTK Variable type (defined in the [cntk.variables](https://cntk.ai/pythondocs/_modules/cntk/variables.html) module) and basically denotes a symbolic entity corresponding to the inputs and outputs of a Function. such Variable-type object can be turned into a Parameter or Constant object (both are defined in the **cntk.variables** module as well).
 
-### Variables of different sizes ###
-The **input_variable** function is able to receive inputs from many sizes thanks to its **shape** attribute. Let's see how to use it.
+The **input_variable** function is also able to receive inputs from many sizes thanks to its **shape** attribute. Let's see how to use it.
+```python
+import cntk
+data  = cntk.input_variable(shape=[3,5])
+```
+This would give us a **data** object with a 3x5 shape (3 rows and 4 columns)
+
+### Usage of **Parameter** ###
+What if we needed to define a variable of 3x5 shape but with some data already placed? We would need to use a Parameter class:
+```python
+import cntk
+data = cntk.parameter(shape=(3,5), init=4)
+```
+What do we have on this data object? Let's see:
+```python
+data.asarray()
+
+output
+array([[ 4.,  4.,  4.,  4.,  4.],
+       [ 4.,  4.,  4.,  4.,  4.],
+       [ 4.,  4.,  4.,  4.,  4.]], dtype=float32)
+```
+
+Note that we could also use:
+```python
+data.value
+
+# and have the same output result: #
+array([[ 4.,  4.,  4.,  4.,  4.],
+       [ 4.,  4.,  4.,  4.,  4.],
+       [ 4.,  4.,  4.,  4.,  4.]], dtype=float32)
+```
