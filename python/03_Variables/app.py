@@ -14,3 +14,9 @@ data  = cntk.input_variable(shape=[3,5])
 # Using Parameter #
 import cntk
 data = cntk.parameter(shape=(3,5), init=2)
+data.value
+
+# Using Constant #
+import cntk
+data = cntk.Constant(6,shape = (3,4))
+data.value
