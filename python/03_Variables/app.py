@@ -20,3 +20,11 @@ data.value
 import cntk
 data = cntk.Constant(6,shape = (3,4))
 data.value
+
+# Using Record #
+import cntk.variables as var
+record = var.Record(x = 23, y = 32, z = 55)
+# printing the record values #
+record.x
+record.y
+record.z
