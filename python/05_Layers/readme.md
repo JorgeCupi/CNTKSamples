@@ -77,5 +77,20 @@ We just create a new Dense() object called hiddenLayerOne. Notice that the Dense
 
 We'll also pass the **featuresShape** value which means that it's the data that will be feed to the model.
 
->NOTE. Later on this same post we'll check how to 'chain' multiple hidden layers. For our small dataset and sample we don't need more than a hidden layer. Remember that less is more and simplicity is key in an AI experiment
+>NOTE. For our small dataset and sample we don't need more than a hidden layer. Remember that less is more and simplicity is key in an AI experiment. So for our experiment we'll leave the number of hidden layers to one.
 
+# 'Chaining' multiple layers #
+So far, we have 3 layers: An input, an output and a hidden layer.
+We chained our input layer with our hidden layer when we created the last one (remember we passed a **featuresShape**):
+
+```python
+hiddenLayerOne = Dense(numberOfHiddenLayerNodes, activation=relu)(featuresShape)
+```
+
+We're basically do the same Dense() object definition with the next differences:
+-  We're setting the number of nodes to the **number of labels** we have in our dataset (2)
+- We're keeping the **ReLU** activation function
+- We're passing the **hiddenLayerOne** to the outputLayer
+```python
+outputLayer = Dense(labelsShapeValue, activation=relu)(hiddenLayerOne)
+```
