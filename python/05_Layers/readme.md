@@ -71,4 +71,11 @@ Now we that explained what is Dense, ReLU and the number of nodes in our hidden 
 ```python
 hiddenLayerOne = Dense(numberOfHiddenLayerNodes, activation=relu)(featuresShape)
 ```
-We just create a new 
+We just create a new Dense() object called hiddenLayerOne. Notice that the Dense constructor receives two parameters:
+- The number of nodes for this layer (in our case this would be 4)
+- An activation function (in our case would be a ReLU function)
+
+We'll also pass the **featuresShape** value which means that it's the data that will be feed to the model.
+
+>NOTE. Later on this same post we'll check how to 'chain' multiple hidden layers. For our small dataset and sample we don't need more than a hidden layer. Remember that less is more and simplicity is key in an AI experiment
+
