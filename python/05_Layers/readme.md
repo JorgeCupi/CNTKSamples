@@ -79,7 +79,7 @@ We'll also pass the **featuresShape** value which means that it's the data that 
 
 >NOTE. For our small dataset and sample we don't need more than a hidden layer. Remember that less is more and simplicity is key in an AI experiment. So for our experiment we'll leave the number of hidden layers to one.
 
-# 'Chaining' multiple layers #
+## 'Chaining' multiple layers ##
 So far, we have 3 layers: An input, an output and a hidden layer.
 We chained our input layer with our hidden layer when we created the last one (remember we passed a **featuresShape**):
 
@@ -93,4 +93,18 @@ We're basically do the same Dense() object definition with the next differences:
 - We're passing the **hiddenLayerOne** to the outputLayer
 ```python
 outputLayer = Dense(labelsShapeValue, activation=relu)(hiddenLayerOne)
+```
+
+## Alternative ways to define layers ##
+While our tiny sample doesn't need more than one hidden layer there might be times when we'll need to define multiple hidden layers and pass each one of them to a next layer until we reach our output layer. There's a **Sequential()** anotiation to do this in an easier way:
+```python
+model = Sequential ([
+    Dense(numberOfNodesForLayerOne, activation=relu),
+    Dense(numberOfNodesForLayerTwo, activation=softmax),
+    ...
+    Dense(numberOfNodesForLayerN, activation=softmax))
+])
+
+## Usage ##
+myModel = model(features)
 ```

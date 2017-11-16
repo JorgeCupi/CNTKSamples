@@ -19,3 +19,5 @@ reader = MinibatchSource(ctfdResult)
 hiddenLayerDimension = 8
 hiddenLayerOne = Dense(hiddenLayerDimension, activation=relu)(featuresShape)
 outputLayer = Dense(labelsShapeValue, activation=relu)(hiddenLayerOne)
+
+## Extra: Using the Sequential() anotation ##
