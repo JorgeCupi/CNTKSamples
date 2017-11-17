@@ -16,6 +16,6 @@ ctfdResult = CTFDeserializer(path, StreamDefs(
 
 reader = MinibatchSource(ctfdResult)
 
-hiddenLayerDimension = 8
+hiddenLayerDimension = 4
 hiddenLayerOne = Dense(hiddenLayerDimension, activation=relu)(featuresShape)
 outputLayer = Dense(labelsShapeValue, activation=relu)(hiddenLayerOne)
