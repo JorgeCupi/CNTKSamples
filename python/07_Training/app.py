@@ -4,7 +4,8 @@ from cntk.layers import Dense
 from cntk.metrics import classification_error
 from cntk.losses import cross_entropy_with_softmax
 from cntk.logging.progress_print import ProgressPrinter
-from cntk.learners import learning_rate_schedule, UnitType
+from cntk.learners import learning_rate_schedule, UnitType, adadelta
+from cntk.train.trainer import Trainer
 
 path = "dataset.txt"
 featuresShapeValue = 6
@@ -38,3 +39,5 @@ printer = [ProgressPrinter(
     num_epochs = numOfEpochs)]
 
 learningRate = learning_rate_schedule([0.1, 0.01, 0.001], UnitType.sample, 700)
+
+trainer = Trainer(outputLayer,(crossEntropy, classificationError), [adadelta(outputLayer.parameters, learningRate)], printer)

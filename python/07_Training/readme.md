@@ -68,3 +68,17 @@ from cntk.learners import learning_rate_schedule, UnitType
 learningRate = learning_rate_schedule(1, UnitType.sample)
 ```
 
+## Understanding the trainer object ##
+Located in the [cntk.train.trainer](https://www.cntk.ai/pythondocs/cntk.train.trainer.html) module, this class do what it says: it performs training on our model based on the next parameters:
+- An output_layer operation
+- Loss and error functions
+- A metric we'll track during training
+- A learning rate
+- A writer
+
+So our trainer object will look like this:
+```python
+from cntk.train.trainer import Trainer
+from cntk.learners import adadelta
+trainer = Trainer(outputLayer,(crossEntropy, classificationError), [adadelta(outputLayer.parameters, learningRate)], printer)
+```
