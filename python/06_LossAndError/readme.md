@@ -70,5 +70,56 @@ hiddenLayerOne = Dense(hiddenLayerDimension, activation=relu)(featuresShape)
 outputLayer = Dense(labelsShapeValue, activation=relu)(hiddenLayerOne)
 
 ## Cross entropy joins our code so far ##
-crossEntropy = cross_entropy_with_softmax(outputLayer, labelShape)
+
+from cntk.losses import cross_entropy_with_softmax
+crossEntropy = cross_entropy_with_softmax(outputLayer, labelsShape)
 ```
+## Classification_Error ##
+We'll use the classification_error function for our demo. This and other error functions are located in the [cntk.metrics](https://cntk.ai/pythondocs/cntk.metrics.html) package. It receives the same basic parameters as our previous cross_entropy_with_softmax function: and output_vector and a target_vector:
+```python
+from cntk.metrics import classification_error
+classificationError = classification_error(outputLayer, labelsShape)
+```
+What this function basically does is to find the index of the highest value in the output_vector and compares it to the actual ground truth label (the index of the hot bit in the target vector)
+
+### So what's a hot bit? ###
+To learn what a hot bit is we first need to learn what a hot vector is, and before that we need to learn a little more about hot encoding.
+
+#### Hot encoding ####
+Do we have numeric or categorical thinking? When we try to classify 'real world' information we think of categories:
+- cats, dogs and cows are animals
+- 1, 2 and 3 are numbers
+- bike, bycicle and a car are vehicles
+- etc...
+
+Some of this categorical data have a natural relationship like our numbers category:
+```javascript
+1 -> 2 -> 3 -> ... -> infinity 
+```
+But what about our animals or vehicles category? 
+```javascript
+cats -> dogs -> cows ? What's even next?
+```
+We could define a relationship but it's not 'natural' per se. So if we wanted to, say, classify an animal in a picture. How could we define values for our dogs, cats and cows? It would be difficult.
+##### Enter numerical data #####
+We could turn our labels into numbers using two approaches:
+- Integer encoding
+- **One-Hot encoding**
+
+Integer encoding basically tells us to asign numbers to our values:
+```javascript
+bycicle = 1
+bike = 2
+card = 3
+and so on
+```
+For some variables and algorithms this could be enough. In our vehicles example we could create a hierarchy where the vehicle with most space for passengers gets a higher value.
+But what about our animals category? We could try to stablish similar hierarchies like categorize our animals in terms of age, number of legs,etc. But we could complicate ourselves.
+
+And when we complicate ourselves we should think of... **One-Hot encoding** which basically consists of assigning a new binary value for our different values. What does this mean? Let's see our new values:
+```javascript
+cat = [0 0 1]
+dog = [0 1 0]
+cow = [1 0 0]
+```
+So those new values are our **hot vectors** that have a single high (our **hot bit**) and all of the other values are low (0 value).
