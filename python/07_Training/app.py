@@ -44,14 +44,16 @@ learningRate = learning_rate_schedule([0.1, 0.01, 0.001], UnitType.sample, 700)
 trainer = Trainer(outputLayer,(crossEntropy, classificationError), [adadelta(outputLayer.parameters, learningRate)], printer)
 
 minibatchSize = 50
-numberOfSamples = 2000
-numberOfSweepsForTraining = 5
+numberOfSamples = 2208
+numberOfSweepsForTraining = 10
 
-training_session(
+trainingSession = training_session(
         trainer=trainer,
         mb_source=reader,
         mb_size=minibatchSize,
         model_inputs_to_streams=input_map,
         max_samples=numberOfSamples * numberOfSweepsForTraining,
         progress_frequency=numberOfSamples
-    ).train()
+    )
+
+trainingSession.train()
