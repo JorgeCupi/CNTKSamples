@@ -6,6 +6,7 @@ from cntk.losses import cross_entropy_with_softmax
 from cntk.logging.progress_print import ProgressPrinter
 from cntk.learners import learning_rate_schedule, UnitType, adadelta
 from cntk.train.trainer import Trainer
+from cntk.train.training_session import training_session
 
 path = "dataset.txt"
 featuresShapeValue = 6
@@ -28,8 +29,8 @@ crossEntropy = cross_entropy_with_softmax(outputLayer, labelsShape)
 classificationError = classification_error(outputLayer, labelsShape)
 
 input_map = {
-    feature: reader.streams.features,
-    label: reader.streams.labels
+    featuresShape: reader.streams.features,
+    labelsShape: reader.streams.labels
 }
 
 numOfEpochs = 10
@@ -41,3 +42,16 @@ printer = [ProgressPrinter(
 learningRate = learning_rate_schedule([0.1, 0.01, 0.001], UnitType.sample, 700)
 
 trainer = Trainer(outputLayer,(crossEntropy, classificationError), [adadelta(outputLayer.parameters, learningRate)], printer)
+
+minibatchSize = 50
+numberOfSamples = 2000
+numberOfSweepsForTraining = 5
+
+training_session(
+        trainer=trainer,
+        mb_source=reader,
+        mb_size=minibatchSize,
+        model_inputs_to_streams=input_map,
+        max_samples=numberOfSamples * numberOfSweepsForTraining,
+        progress_frequency=numberOfSamples
+    ).train()

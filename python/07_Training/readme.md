@@ -32,8 +32,8 @@ We're finally reaching the most entertaining part from this mini repo series: Tr
 But let's go step by step, before performing a training time we need to define an input_map object, which is just a dictionary that contains input and output training pairs:
 ```python
 input_map = {
-    feature: reader.streams.features,
-    label: reader.streams.labels
+    featuresShape: reader.streams.features,
+    labelsShape: reader.streams.labels
 }
 ```
 With our input map in place we'll create a ProgressPrinter object located in the [cntk.logging](https://www.cntk.ai/pythondocs/cntk.logging.html) package and the [progress_print](https://www.cntk.ai/pythondocs/cntk.logging.progress_print.html) sub module. It allows us to print metrics like our classification and loss errors while the model is training:
@@ -81,4 +81,22 @@ So our trainer object will look like this:
 from cntk.train.trainer import Trainer
 from cntk.learners import adadelta
 trainer = Trainer(outputLayer,(crossEntropy, classificationError), [adadelta(outputLayer.parameters, learningRate)], printer)
+```
+## Understanding the Training session object ##
+Funny enough, this class is declared in yet another module: The [cntk.train.training_session](https://www.cntk.ai/pythondocs/cntk.train.training_session.html) module.
+What it allows to do is to grab our previously **trainer** object, our **MinibatchSource**, our **input_map**, an **epoch time** and finally train our model. Let's look at the code:
+
+```python
+from cntk.train.training_session import training_session
+minibatchSize = 50
+numberOfSamples = 2000
+numberOfSweepsForTraining = 5
+training_session(
+        trainer=trainer,
+        mb_source=reader,
+        mb_size=minibatchSize,
+        model_inputs_to_streams=input_map,
+        max_samples=numberOfSamples * numberOfSweepsForTraining,
+        progress_frequency=numberOfSamples
+    ).train()
 ```
